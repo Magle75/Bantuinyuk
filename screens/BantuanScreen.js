@@ -111,9 +111,26 @@ const BantuanScreen = () => {
           onChangeText={(text) => setReqBantu(text)}
         />
       </View>
-      <TouchableOpacity onPress={kirim} style={styles.button}>
-        <Text style={styles.buttonText}>Kirim</Text>
-      </TouchableOpacity>
+      
+      <TouchableOpacity onPress={() => {
+  Alert.alert(
+    "Konfirmasi",
+    "Apakah Anda yakin ingin mengirim pesanan?",
+    [
+      {
+        text: "Batal",
+        style: "cancel",
+      },
+      {
+        text: "Kirim",
+        onPress: kirim,
+      },
+    ],
+    { cancelable: true }
+  );
+}} style={styles.button}>
+  <Text style={styles.buttonText}>Kirim</Text>
+</TouchableOpacity>
     </ScrollView>
   );
 };

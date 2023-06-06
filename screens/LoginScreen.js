@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -37,13 +38,16 @@ const LoginScreen = () => {
     return unsubscribe;
   },[])
   
-  const login = () => {
-    signInWithEmailAndPassword(auth,email,password).then((userCredential) => {
-      console.log("user credential",userCredential);
+  const login = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      console.log("user details",user)
-    })
-  }
+      console.log("user details", user);
+    } catch (error) {
+      console.log("login error", error);
+      Alert.alert("Error", "Email atau password Anda salah.");
+    }
+  };
 
   return (
     <SafeAreaView
